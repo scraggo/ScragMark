@@ -7,7 +7,15 @@ let resizeWindow = debounce(function(e) {
   console.log(width.slice(0, width.length-2), e.buttons);
 }, 250) 
 
-mdText.addEventListener("keydown", () => status.innerHTML = "Modified");
+mdText.addEventListener("keydown", function(evt) {
+  evt = evt || window.event;
+  if (evt.keyCode == 27) {
+    saveAll();
+    // alert('Esc key pressed.');
+  }
+  status.innerHTML = "Modified";
+});
+
 mdText.addEventListener("mousemove", resizeWindow);
 
 document.body.addEventListener("change", saveAll);
